@@ -12,8 +12,12 @@ import br.com.alura.forum.model.Usuario;
 @Service
 public class UsuarioService implements UserDetailsService {
 
-	@Autowired
 	private UsuarioDao usuarioDao;
+	
+	@Autowired
+	public UsuarioService(UsuarioDao usuarioDao) {
+		this.usuarioDao = usuarioDao;
+	}
 	
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

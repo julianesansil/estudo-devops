@@ -11,14 +11,18 @@ import br.com.alura.forum.model.Usuario;
 @Service
 public class CadastroUsuarioService {
 
-	@Autowired
 	private UsuarioDao usuarioDao;
 	
-	@Autowired
 	private PerfilDao perfilDao;
 	
-	@Autowired
 	private Md5Service md5;
+	
+	@Autowired
+	public CadastroUsuarioService(UsuarioDao usuarioDao, PerfilDao perfilDao, Md5Service md5) {
+		this.usuarioDao = usuarioDao;
+		this.perfilDao = perfilDao;
+		this.md5 = md5;
+	}
 	
 	@Transactional
 	public void cadastrarNovoUsuario(Usuario novo) {
