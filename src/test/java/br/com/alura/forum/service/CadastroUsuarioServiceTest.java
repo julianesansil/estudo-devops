@@ -9,7 +9,7 @@ import br.com.alura.forum.model.Perfil;
 import br.com.alura.forum.model.Usuario;
 
 public class CadastroUsuarioServiceTest {
-
+	
 	@Test(expected = IllegalArgumentException.class)
 	public void deve_lancar_excecao_quando_ja_existe_o_usuario() {
 		UsuarioDao usuarioDao = Mockito.mock(UsuarioDao.class);
