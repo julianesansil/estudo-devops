@@ -2,10 +2,23 @@ pipeline {
    agent any
 
    stages {
-      stage('Build & Test') {
+      stage('Test') {
          steps {
             // Get some code from a GitHub repository
             git 'git@github.com:julianesansil/estudo-devops.git'
+
+            // Run Maven on a Unix agent.
+            sh "mvn clean test"
+
+            // To run Maven on a Windows agent, use
+            // bat "mvn -Dmaven.test.failure.ignore=true clean package"
+         }
+      }
+
+      stage('Build') {
+         steps {
+            // Get some code from a GitHub repository
+            // git 'git@github.com:julianesansil/estudo-devops.git'
 
             // Run Maven on a Unix agent.
             sh "mvn clean package"
