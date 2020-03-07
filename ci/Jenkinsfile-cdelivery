@@ -8,13 +8,9 @@ pipeline {
 
             sh "mvn clean package"
             
-            sh 'scp -o StrictHostKeyChecking=no -i /home/vagrant/id_rsa target/alura-forum-0.0.1-SNAPSHOT.war vagrant@192.168.50.12:/home/vagrant/alura-forum.war'
+            sh 'scp -o StrictHostKeyChecking=no -i /infra/ssh-keys/id_rsa target/alura-forum-0.0.1-SNAPSHOT.war vagrant@192.168.50.12:/infra/ssh-keys/alura-forum.war'
             
-            sh "ssh -o StrictHostKeyChecking=no -i /home/vagrant/id_rsa vagrant@192.168.50.12 'sudo mv /home/vagrant/alura-forum.war /var/lib/tomcat8/webapps/alura-forum.war'"
-
-            sh 'scp -o StrictHostKeyChecking=no -i /home/vagrant/id_rsa target/alura-forum-0.0.1-SNAPSHOT.war vagrant@192.168.50.13:/home/vagrant/alura-forum.war'
-            
-            sh "ssh -o StrictHostKeyChecking=no -i /home/vagrant/id_rsa vagrant@192.168.50.13 'sudo mv /home/vagrant/alura-forum.war /var/lib/tomcat8/webapps/alura-forum.war'"
+            sh "ssh -o StrictHostKeyChecking=no -i /infra/ssh-keys/id_rsa vagrant@192.168.50.12 'sudo mv /infra/ssh-keys/alura-forum.war /var/lib/tomcat8/webapps/alura-forum.war'"
          }
       }
    }
