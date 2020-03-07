@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -26,6 +27,7 @@ public class FluxoDeCadastroTest {
 		browser.close();
 	}
 	
+	@Ignore
 	@Test
 	public void deve_ser_capaz_de_criar_uma_conta() throws IOException, InterruptedException {
 		Faker faker = new Faker();
