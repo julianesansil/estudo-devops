@@ -17,6 +17,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 public class JPAConfiguration {
 
+	private static final String DEFAULT_URL = "jdbc:mysql://localhost:3306/alura_forum?useSSL=false";
+	private static final String DEFAULT_USER = "root";
+	private static final String DEFAULT_PASSWORD = "toor";
+	
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
@@ -30,28 +34,21 @@ public class JPAConfiguration {
 		return em;
 	}
 
-	/* DATASOURCE DE DESENVOLVIMENTO */ 
-	// @Bean
-	// public DataSource dataSource() {
-	// 	DriverManagerDataSource dataSource = new DriverManagerDataSource();
-	// 	dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-	// 	dataSource.setUrl("jdbc:mysql://localhost:3306/alura_forum?useSSL=false");
-	// 	dataSource.setUsername("root");
-	// 	dataSource.setPassword("");
-	// 	return dataSource;
-	// }
-
-	/* DATASOURCE DE PRODUCAO */
+	// DATASOURCE DE PRODUCAO
 	@Bean
 	public DataSource dataSource() {
+		
+		String url = System.getenv("FORUM_DB_URL") != null ? System.getenv("FORUM_DB_URL") : DEFAULT_URL;
+		String user = System.getenv("FORUM_DB_USER") != null ? System.getenv("FORUM_DB_USER") : DEFAULT_USER;
+		String password = System.getenv("FORUM_DB_PASSWORD") != null ? System.getenv("FORUM_DB_PASSWORD") : DEFAULT_PASSWORD;
+		
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://192.168.50.11:3306/alura_forum?useSSL=false");
-		dataSource.setUsername("alura");
-		dataSource.setPassword("qwerty123");
+		dataSource.setUrl(url);
+		dataSource.setUsername(user);
+		dataSource.setPassword(password);
 		return dataSource;
 	}
-	
 	
 	@Bean
 	public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {

@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+  labels:
+    app: web
+spec:
+  ports:
+    - port: 80
+      targetPort: http
+  selector:
+    app: web
+  type: LoadBalancer
+---
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: web
+  labels:
+    app: web
+spec:
+  selector:
+    matchLabels:
+      app: web
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+      - image: newtonbeck/alura-forum:latest
+        name: web
+        env:
+        - name: FORUM_DB_URL
+          value: jdbc:mysql://forum-mysql:3306/alura_forum?useSSL=false
+        - name: FORUM_DB_USER
+          value: root
+        - name: FORUM_DB_PASSWORD
+          value: toor
+        ports:
+        - containerPort: 8080
+          name: http

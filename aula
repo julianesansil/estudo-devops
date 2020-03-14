@@ -1,0 +1,25 @@
+
+Como esse código está gerando valor?
+
+BUILD => .war
+DEPLOY => scp, ssh
+
+TESTES AUTOMATIZADOS
+3. Testes e2e
+2. Testes de integração
+1. Testes unitários
+
+CRIAÇÃO E PROVISIONAMENTO DE MÁQUINAS VIRTUAIS
+- Vagrant
+- Ansible => Playbook
+- Chef => Receita
+- Pupet => 
+
+MÁQUINA VIRTUAL = kernel / so / HYPERVISOR / kernel / so / programa
+CONTAINER/DOCKER = kernel / so / DOCKER / so / programa
+
+EXTRAS
+Load balancer = ngix
+Monitoração push = StatsD + Graphite + Graphana
+Monitoração pull = Prometheus + Grafana
+
